@@ -1,13 +1,183 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Poppins:wght@100;300;400;500;600;700;800&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.container {
+  background: linear-gradient(
+    135deg,
+    hsla(240, 56%, 14%, 1) 61%,
+    hsla(242, 30%, 25%, 1) 100%,
+    hsla(237, 64%, 56%, 1) 100%
+  );
+  font-family: "Poppins", sans-serif;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 2px 2px 5px #404040;
+}
+
+.info-container {
+  background-color: #1a1c49;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 30px;
+  padding: 2rem;
+}
+
+.app-title {
+  font-size: 1.2rem;
+  font-weight: 300;
+}
+
+.current-date {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 450px;
+}
+
+.current-date .day {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.current-date .date-today {
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.form {
+  margin: 2rem 0;
+  display: flex;
+  box-shadow: 3px 3px 10px 1px #473a00;
+}
+
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  line-height: 25px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  border-radius: 6px 0 0 6px;
+  color: #888;
+  border: 1px solid var(--input-border);
+  background: #fff;
+  transition: border 0.3s ease;
+}
+
+.temp {
+  font-size: 5rem;
+  position: relative;
+  font-weight: 600;
+}
+
+.temp span {
+  font-size: 4rem;
+}
+
+.temp .celsius {
+  font-size: 2rem;
+  color: #fad059;
+  position: absolute;
+  top: 20px;
+}
+
+.weather {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weather .location {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 100;
+  text-transform: capitalize;
+}
+
+.weather-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.current-hour {
+  margin-bottom: 2rem;
+}
+
+.form-input::placeholder {
+  outline: none;
+  border-color: #cbd1dc;
+  color: #cbd1dc;
+  background-color: transparent;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #275efe;
+}
+
+.btn {
+  text-align: center;
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 25px;
+  color: #0c3030;
+  background: #fad059;
+  border: 1px solid #cdd9ed;
+  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+  border-radius: 0 6px 6px 0;
+}
+
+.weather-condition {
+  font-weight: 300;
+  margin-bottom: 1rem;
+  margin-top: -2rem;
+}
+
+.aditional-info {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 400px;
+  margin: 2rem auto;
+  text-shadow: 2px 2px 5px #404040;
+}
+
+.aditional-info .aditional-info__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #1a1c49;
+  border-radius: 15px;
+  padding: 0.6rem;
+  width: 30%;
+}
+
+.aditional-info .aditional-info__container p {
+  font-weight: 300;
+}
+
+.aditional-info .aditional-info__container span {
+  color: #fad059;
+  font-weight: 100;
 }
