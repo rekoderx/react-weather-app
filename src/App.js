@@ -1,4 +1,5 @@
 import { useReducer } from "react";
+import SearchForm from "./components/SearchForm";
 import { CiLocationOn } from "react-icons/ci";
 import { CiTempHigh } from "react-icons/ci";
 import { BiWind } from "react-icons/bi";
@@ -43,7 +44,7 @@ function App() {
   };
 
   const searchWithEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e === "Enter") {
       fetchData();
       dispatch({ type: "SET_LOCATION", payload: "" });
     }
@@ -58,13 +59,24 @@ function App() {
     e.preventDefault();
   };
 
+  const handleOnChangeInput = (e) => {
+    dispatch({ type: "SET_LOCATION", payload: e });
+  };
+
   const today = dateFormat(new Date(), "dddd, dS mmmm");
   masks.hour = "HH:MM tt";
 
   return (
     <div className="container">
       <h5 className="app-title">Weather Forecast</h5>
-      <form className="form" onSubmit={handleSubmit}>
+      <SearchForm
+        handleSubmit={handleSubmit}
+        location={state.location}
+        searchWithEnter={searchWithEnter}
+        searchWithBtn={searchWithBtn}
+        handleOnChangeInput={handleOnChangeInput}
+      />
+      {/* <form className="form" onSubmit={handleSubmit}>
         <input
           type="text"
           className="form-input"
@@ -79,7 +91,7 @@ function App() {
         <button className="btn" type="button" onClick={searchWithBtn}>
           Show
         </button>
-      </form>
+      </form> */}
       {state.loading && (
         <div className="loading">
           <div className="sweet-loading">
