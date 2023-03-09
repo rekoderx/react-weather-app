@@ -42,7 +42,7 @@ function App() {
     }
   };
 
-  const searchLocation = (e) => {
+  const searchWithEnter = (e) => {
     if (e.key === "Enter") {
       fetchData();
       dispatch({ type: "SET_LOCATION", payload: "" });
@@ -74,7 +74,7 @@ function App() {
           onChange={(e) =>
             dispatch({ type: "SET_LOCATION", payload: e.target.value })
           }
-          onKeyDown={searchLocation}
+          onKeyDown={searchWithEnter}
         />
         <button className="btn" type="button" onClick={searchWithBtn}>
           Show
