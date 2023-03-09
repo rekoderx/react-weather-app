@@ -6,6 +6,15 @@
   box-sizing: border-box;
 }
 
+body {
+  font-size: 16px;
+}
+
+input,
+select {
+  font-size: 100%;
+}
+
 .container {
   background: linear-gradient(
     135deg,
