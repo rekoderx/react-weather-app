@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { CiTempHigh } from "react-icons/ci";
 import { BiWind } from "react-icons/bi";
@@ -6,6 +6,7 @@ import { BsClouds } from "react-icons/bs";
 import FadeLoader from "react-spinners/FadeLoader";
 import dateFormat, { masks } from "dateformat";
 import ImageChange from "./components/ImageChange";
+import reducer from "./reducer";
 
 // styling spinner
 const override = {
@@ -14,43 +15,43 @@ const override = {
   color: "#fff",
 };
 
+const initialState = {
+  weather: {},
+  location: "",
+  error: null,
+  loading: false,
+};
+
 // api path
 const api = `https://api.weatherapi.com/v1/current.json?key=20aaa760a34c49648a5104827230603`;
 
 function App() {
-  const [weather, setWeather] = useState({});
-  const [location, setLocation] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setIsLoading] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const fetchData = async () => {
     try {
-      setIsLoading(false);
-      const response = await fetch(`${api}&q=${location}&aqi=no`);
+      dispatch({ type: "LOADING" });
+      const response = await fetch(`${api}&q=${state.location}&aqi=no`);
       if (!response.ok) {
         throw Error("Location does not exist.");
       }
       const data = await response.json();
-      setWeather(data);
-      setIsLoading(false);
-      setError(null);
+      dispatch({ type: "GET_DATA", payload: data });
     } catch (error) {
-      setIsLoading(false);
-      setError(error.message);
+      dispatch({ type: "SET_ERROR", payload: state.error });
     }
   };
 
   const searchLocation = (e) => {
     if (e.key === "Enter") {
       fetchData();
-      setLocation("");
-      setIsLoading(true);
+      dispatch({ type: "SET_LOCATION", payload: "" });
     }
   };
 
   const searchWithBtn = () => {
     fetchData();
-    setLocation("");
+    dispatch({ type: "SET_LOCATION" });
   };
 
   const handleSubmit = (e) => {
@@ -69,19 +70,21 @@ function App() {
           className="form-input"
           placeholder="Enter location"
           autoFocus
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={state.location}
+          onChange={(e) =>
+            dispatch({ type: "SET_LOCATION", payload: e.target.value })
+          }
           onKeyDown={searchLocation}
         />
         <button className="btn" type="button" onClick={searchWithBtn}>
           Show
         </button>
       </form>
-      {loading && (
+      {state.loading && (
         <div className="loading">
           <div className="sweet-loading">
             <FadeLoader
-              loading={loading}
+              loading={state.loading}
               cssOverride={override}
               size={50}
               color="#fff"
@@ -92,7 +95,7 @@ function App() {
         </div>
       )}
 
-      {weather.location ? (
+      {state.weather.location ? (
         <>
           <div className="info-container">
             <div className="current-date">
@@ -102,21 +105,19 @@ function App() {
             <div className="weather">
               <div className="weather-info">
                 <h2 className="temp">
-                  {Math.round(weather.current.temp_c)}
+                  {Math.round(state.weather.current.temp_c)}
                   <span className="celsius">&#8451;</span>
                 </h2>
-                <ImageChange condition={weather.current.condition.text} />
+                <ImageChange condition={state.weather.current.condition.text} />
               </div>
               <div className="location-condition">
                 <h4 className="location">
                   <CiLocationOn
                     style={{ color: "yellow", marginRight: "3px" }}
                   />
-                  {weather.location.name}, {weather.location.country}
+                  {state.weather.location.name},{" "}
+                  {state.weather.location.country}
                 </h4>
-                {/* <p className="weather-condition">
-                  {weather.current.condition.text}
-                </p> */}
               </div>
             </div>
           </div>
@@ -131,7 +132,7 @@ function App() {
                 }}
               />
               <p>
-                <span></span> {Math.round(weather.current.feelslike_c)}
+                <span></span> {Math.round(state.weather.current.feelslike_c)}
                 &deg;
               </p>
             </div>
@@ -145,7 +146,7 @@ function App() {
                 }}
               />
               <p>
-                <span></span> {Math.round(weather.current.wind_kph)} kph
+                <span></span> {Math.round(state.weather.current.wind_kph)} kph
               </p>
             </div>
             <div className="aditional-info__container">
@@ -158,13 +159,13 @@ function App() {
                 }}
               />
               <p>
-                <span></span> {weather.current.cloud}%
+                <span></span> {state.weather.current.cloud}%
               </p>
             </div>
           </div>
         </>
       ) : (
-        <div>{error}</div>
+        <div>{state.error}</div>
       )}
     </div>
   );

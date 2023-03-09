@@ -1,4 +1,3 @@
-import React from "react";
 import WeatherImage from "./WeatherImage";
 import sunny from "../assets/sunny.png";
 import cloudy from "../assets/cloudy.png";
@@ -27,8 +26,7 @@ const ImageChange = ({ condition }) => {
     case "Clear":
       return <WeatherImage condition={sunny} />;
     default:
-      // return <WeatherImage condition={cloudy} />;
-      return null;
+      return <WeatherImage condition={cloudy} />;
   }
 };
 
