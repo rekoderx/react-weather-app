@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { CiTempHigh } from "react-icons/ci";
 import { BiWind } from "react-icons/bi";
