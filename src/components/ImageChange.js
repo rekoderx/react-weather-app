@@ -27,7 +27,8 @@ const ImageChange = ({ condition }) => {
     case "Clear":
       return <WeatherImage condition={sunny} />;
     default:
-      return <WeatherImage condition={cloudy} />;
+      // return <WeatherImage condition={cloudy} />;
+      return null;
   }
 };
 

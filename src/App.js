@@ -5,7 +5,7 @@ import { BiWind } from "react-icons/bi";
 import { BsClouds } from "react-icons/bs";
 import FadeLoader from "react-spinners/FadeLoader";
 import dateFormat, { masks } from "dateformat";
-import imageChange from "./components/ImageChange";
+import ImageChange from "./components/ImageChange";
 
 // styling spinner
 const override = {
@@ -105,7 +105,7 @@ function App() {
                   {Math.round(weather.current.temp_c)}
                   <span className="celsius">&#8451;</span>
                 </h2>
-                {imageChange(weather.current.condition.text)}
+                <ImageChange condition={weather.current.condition.text} />
               </div>
               <div className="location-condition">
                 <h4 className="location">
