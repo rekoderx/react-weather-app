@@ -51,7 +51,7 @@ function App() {
 
   const searchWithBtn = () => {
     fetchData();
-    dispatch({ type: "SET_LOCATION" });
+    dispatch({ type: "SET_LOCATION", payload: "" });
   };
 
   const handleSubmit = (e) => {
