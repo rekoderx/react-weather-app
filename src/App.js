@@ -132,18 +132,22 @@ function App() {
             <div className="weather">
               <div className="weather-info">
                 <h2 className="temp">
-                  {Math.ceil(weather.current.temp_c)}
+                  {Math.round(weather.current.temp_c)}
                   <span className="celsius">&#8451;</span>
                 </h2>
                 {imageChange(weather.current.condition.text)}
               </div>
-              <h4 className="location">
-                <CiLocationOn style={{ color: "yellow", marginRight: "3px" }} />
-                {weather.location.name}, {weather.location.country}
-              </h4>
-              {/* <p className="weather-condition">
-              {weather.current.condition.text}
-            </p> */}
+              <div className="location-condition">
+                <h4 className="location">
+                  <CiLocationOn
+                    style={{ color: "yellow", marginRight: "3px" }}
+                  />
+                  {weather.location.name}, {weather.location.country}
+                </h4>
+                {/* <p className="weather-condition">
+                  {weather.current.condition.text}
+                </p> */}
+              </div>
             </div>
           </div>
           <div className="aditional-info">
@@ -157,7 +161,7 @@ function App() {
                 }}
               />
               <p>
-                <span></span> {Math.ceil(weather.current.feelslike_c)}
+                <span></span> {Math.round(weather.current.feelslike_c)}
                 &deg;
               </p>
             </div>
@@ -171,7 +175,7 @@ function App() {
                 }}
               />
               <p>
-                <span></span> {weather.current.wind_kph} kph
+                <span></span> {Math.round(weather.current.wind_kph)} kph
               </p>
             </div>
             <div className="aditional-info__container">
