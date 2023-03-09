@@ -1,16 +1,11 @@
-import { useState } from "react";
+import { useState, useReducer } from "react";
 import { CiLocationOn } from "react-icons/ci";
 import { CiTempHigh } from "react-icons/ci";
 import { BiWind } from "react-icons/bi";
 import { BsClouds } from "react-icons/bs";
 import FadeLoader from "react-spinners/FadeLoader";
 import dateFormat, { masks } from "dateformat";
-// import images
-import sunny from "./assets/sunny.png";
-import cloudy from "./assets/cloudy.png";
-import rainy from "./assets/rainy.png";
-import snow from "./assets/snow.png";
-import overcast from "./assets/overcast.png";
+import imageChange from "./components/ImageChange";
 
 // styling spinner
 const override = {
@@ -60,31 +55,6 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-
-  const imageChange = (condition) => {
-    switch (condition) {
-      case "Sunny":
-        return <img src={sunny} alt="clear sky" width={150} />;
-      case "Partly cloudy":
-        return <img src={cloudy} alt="cloudy sky" width={150} />;
-      case "Cloudy":
-        return <img src={cloudy} alt="cloudy sky" width={150} />;
-      case "Heavy snow":
-        return <img src={snow} alt="cloudy sky" width={150} />;
-      case "Overcast":
-        return <img src={overcast} alt="cloudy sky" width={150} />;
-      case "Rainy":
-        return <img src={rainy} alt="cloudy sky" width={150} />;
-      case "Moderate rain":
-        return <img src={rainy} alt="cloudy sky" width={150} />;
-      case "Light rain":
-        return <img src={rainy} alt="cloudy sky" width={150} />;
-      case "Clear":
-        return <img src={sunny} alt="cloudy sky" width={150} />;
-      default:
-        return <img src={cloudy} alt="sunny sky" width={150} />;
-    }
   };
 
   const today = dateFormat(new Date(), "dddd, dS mmmm");
